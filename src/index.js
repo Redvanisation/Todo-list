@@ -11,25 +11,21 @@ const clear = document.querySelector('#clear');
 const display = document.querySelector('#display');
 const projects = localStorage.getItem('projects') ? JSON.parse(localStorage.getItem('projects')) : [];
 
-function showProjects() {
+function showProjectsList() {
   projects.forEach((item) => {
-    const titleDisplay = document.createElement('h2');
-    const descDisplay = document.createElement('p');
-    const dateDisplay = document.createElement('p');
-    const prioDisplay = document.createElement('p');
-    const noteDisplay = document.createElement('p');
 
-    titleDisplay.innerHTML = item.title;
-    descDisplay.innerHTML = item.description;
-    dateDisplay.innerHTML = item.dueDate;
-    prioDisplay.innerHTML = item.priority;
-    noteDisplay.innerHTML = item.notes;
+    const divProject = `
+      <h2> ${item.title} </h2>
+      <p>Description: ${item.description} </p>
+      <p>Due Date: ${item.dueDate} </p>
+      <p>Priority: ${item.priority} </p>
+      <p>Notes: ${item.notes} </p>
+    `;
 
-    display.appendChild(titleDisplay);
-    display.appendChild(descDisplay);
-    display.appendChild(dateDisplay);
-    display.appendChild(prioDisplay);
-    display.appendChild(noteDisplay);
+    const auxDiv = document.createElement('div');
+
+    auxDiv.innerHTML = divProject;
+    display.appendChild(auxDiv);
   });
 }
 
@@ -39,16 +35,16 @@ function handleClick() {
 
   projects.push(project);
   localStorage.setItem('projects', JSON.stringify(projects));
-  showProjects();
+  showProjectsList();
 }
 
 function clearLocalStore() {
   localStorage.clear();
-  showProjects();
+  showProjectsList();
   console.log(localStorage);
 }
 
 submit.addEventListener('click', handleClick);
 clear.addEventListener('click', clearLocalStore);
 
-showProjects();
+showProjectsList();
