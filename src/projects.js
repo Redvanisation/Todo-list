@@ -1,13 +1,9 @@
 /* eslint-disable no-param-reassign */
-const Project = (title, description, dueDate, priority = false, notes) => {
+const Project = (title, description, dueDate, priority, notes) => {
   dueDate = new Date().toLocaleString().substring(0, 10);
 
-
-  // eslint-disable-next-line no-return-assign
-  const changePriority = () => priority = !priority;
-
   return {
-    title, description, dueDate, priority, notes, changePriority,
+    title, description, dueDate, priority, notes,
   };
 };
 
