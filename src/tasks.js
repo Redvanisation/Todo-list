@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-const Project = (title, description, dueDate, priority, notes) => {
+const Task = (title, description, dueDate, priority = 0, notes) => {
   dueDate = new Date().toLocaleString().substring(0, 10);
 
   return {
@@ -7,4 +7,4 @@ const Project = (title, description, dueDate, priority, notes) => {
   };
 };
 
-export default Project;
+export default Task;

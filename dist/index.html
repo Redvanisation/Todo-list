@@ -10,21 +10,31 @@
     
     <main class="content">
         <h1>Welcome to the todo list</h1>
+        <!-- Forms -->
         <div class="new-project">
-            <!-- <form action="#"> -->
-                <input type="text" placeholder="Title" id="title"><br>
+            <input type="text" class="project-title" placeholder="Project Title" required>
+            <button id="submit-project">Create</button>
+            <button id="cancel-project">Cancel</button>
+        </div>
+        <div class="new-task hidden">
+                <input type="text" placeholder="Title" id="task-title" required><br>
                 <input type="text" placeholder="Description" id="description"><br>
                 <input type="date" id="date"><br>
                 <label id="checkbox-label">High Priority:</label>
                 <input type="checkbox" id="priority"><br>
                 <textarea name="notes" id="notes" cols="30" rows="10"></textarea><br>
                 <button id="submit">Submit</button>
-                <button id="clear">Clear</button>
-                <!-- </form> -->
-        </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <button id="clear">Clear</button>
 
+            <hr>
+            <br>
+            <!-- Display elements -->
         <div id='display' class="display-project">
-
+            
         </div>
     </main>
 

@@ -1,50 +1,63 @@
-import Project from './projects';
+import Project from './project';
+import Task from './tasks';
 import './style/style.css';
 
-const title = document.querySelector('#title');
+// Task inputs
+const taskTitle = document.querySelector('#task-title');
 const description = document.querySelector('#description');
 const date = document.querySelector('#date');
 let priority = document.querySelector('#priority');
 const notes = document.querySelector('#notes');
-const submit = document.querySelector('#submit');
+const submitTask = document.querySelector('#submit');
+
+// General elements
 const clear = document.querySelector('#clear');
 const display = document.querySelector('#display');
-const projects = localStorage.getItem('projects') ? JSON.parse(localStorage.getItem('projects')) : [];
 
-function showProjectsList() {
-  projects.forEach((item) => {
+// Project inputs
+const projectTitle = document.querySelector('.project-title');
+const submitProject = document.querySelector('#submit-project');
+const cancelProject = document.querySelector('#cancel-project');
+// const newProjectForm = document.querySelector('.new-project');
 
-    const divProject = `
-      <h2> ${item.title} </h2>
-      <p>Description: ${item.description} </p>
-      <p>Due Date: ${item.dueDate} </p>
-      <p>Priority: ${item.priority} </p>
-      <p>Notes: ${item.notes} </p>
-    `;
+// newProjectForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   addProject();
+// });
 
-    const auxDiv = document.createElement('div');
 
-    auxDiv.innerHTML = divProject;
-    display.appendChild(auxDiv);
-  });
-}
 
-function handleClick() {
-  const project = Project(title.value, description.value, date.value,
-    priority.checked ? priority = true : priority = false, notes.value);
+function addProject() {
+  if (!projectTitle.value) return alert('Title must be provided!');
+  const project = Project(projectTitle.value);
+  console.log(project.title);
 
-  projects.push(project);
-  localStorage.setItem('projects', JSON.stringify(projects));
-  showProjectsList();
+  // project.addTask(Task('Task 1', 'Description'));
+  // project.addTask(Task('Task 2', 'Description 2'));
+  // localStorage.setItem(project.title, JSON.stringify(project.tasks));
+  // const showTask = JSON.parse(localStorage.getItem(project.title));
+
+  // showTask.forEach(task => {
+  //   console.log(task);
+  //   display.innerHTML += `
+  //     ${task.title}<br>
+  //     ${task.description}<br>
+  //     ${task.date}<br>
+  //     ${task.priority}
+  //   `;
+  // });
 }
 
 function clearLocalStore() {
   localStorage.clear();
-  showProjectsList();
   console.log(localStorage);
 }
 
-submit.addEventListener('click', handleClick);
+
+submitProject.addEventListener('click', addProject);
+// submitTask.addEventListener('click', handleClick);
 clear.addEventListener('click', clearLocalStore);
 
-showProjectsList();
+// showProjectsList();
+
+
