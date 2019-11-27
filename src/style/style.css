@@ -1,7 +1,131 @@
-h1 {
-    color: orange;
+*,
+html,
+body {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    background-color: orange;
+    height: 100px;
+    box-shadow: 0 1px 2px 2px rgba(0,0,0,.1);
+    margin-bottom: 5rem;
+}
+
+.main-title {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    padding: 1rem 0;
 }
 
 .hidden {
     display: none;
+}
+
+.margin {
+    margin: 2rem;
+}
+
+.new-project {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.input {
+    border: 2px solid orange;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+.submit-btn {
+    background-color: transparent;
+    border: 2px solid orange;
+    color: orange;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    outline: none;
+    transition: all .2s;
+}
+
+.submit-btn:hover {
+    color: #fff;
+    background-color: orange;
+}
+
+.projects-container {
+    border-top: 2px solid orange;
+}
+
+.project-title {
+    border-bottom: 2px solid orange;
+    padding: 2rem 0;
+    transition: all .3s;
+}
+
+.project-title:hover {
+    background-color: rgba(255, 165, 0,.1);
+}
+
+.clicked {
+    background-color: rgba(255, 165, 0,1);
+    color: white;
+}
+
+
+.new-task {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    background-color: #fff;
+    border: 2px solid orange;
+    border-radius: 5px;
+    z-index: 999;
+    text-align: center;
+    padding: 2rem;
+}
+
+.task-title,
+.task-description {
+    width: 90%;
+}
+
+.task-date {
+    
+    width: 90%;
+}
+
+.task-notes {
+    width: 90%;
+}
+
+.tasks-list {
+    border: 1px solid orange;
+    padding: 2rem;
+    width: 80%;
+    margin: 1rem auto;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.tasks-list:hover {
+    background-color: rgba(255, 165, 0,.1);
+}
+
+.tsk-title,
+.tsk-heading {
+    color: orange;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.tsk-detail {
+
 }
