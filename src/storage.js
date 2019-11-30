@@ -7,12 +7,8 @@ function addProject() {
   
     lsProjects.push(project);
     
-    localStorage.setItem("projects", JSON.stringify(lsProjects));
+    localStorage.setItem('projects', JSON.stringify(lsProjects));
     return showProjects();
   }
 
-  function closeTasksForm() {
-    newTask.classList.add('hidden');
-  }
-
-export { addProject, closeTasksForm };
+export { addProject };

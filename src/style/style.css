@@ -65,6 +65,7 @@ body {
 .project-title {
     border-bottom: 2px solid orange;
     padding: 2rem 0;
+    cursor: pointer;
     transition: all .3s;
 }
 
@@ -98,7 +99,6 @@ body {
 }
 
 .task-date {
-    
     width: 90%;
 }
 
@@ -126,6 +126,25 @@ body {
     font-weight: bold;
 }
 
-.tsk-detail {
+.btn-priority {
+    padding: .5rem 1.5rem;
+    border-radius: 5px;
+    outline: none;
+}
 
+.Low {
+    background-color: transparent;
+    border: 2px solid orange;
+    color: orange;
+}
+
+.Normal {
+    background-color: rgba(255, 165, 0,.5);
+    border: 2px solid orange;
+    color: #fff;
+}
+
+.High {
+    background-color: rgba(255, 165, 0,1);
+    color: #fff;
 }

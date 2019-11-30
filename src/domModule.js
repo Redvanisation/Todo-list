@@ -1,4 +1,4 @@
-import { addProject, closeTasksForm } from './storage';
+import { addProject } from './storage';
 import Task from './tasks';
 
 const clear = document.querySelector('#clear');
@@ -35,6 +35,11 @@ function addTask(elem) {
     newTask.classList.add('hidden');
 }
 
+
+function closeTasksForm() {
+  newTask.classList.add('hidden');
+}
+
 function showTaskForm(elem) {
   newTask.innerHTML = `
       <input type="text" placeholder="Title" id="task-title" class="task-title input" required><br>
@@ -58,20 +63,33 @@ function showTaskForm(elem) {
   
   btnSummit.addEventListener('click', () => addTask(elem));
   btnCancel.addEventListener('click', closeTasksForm);
-  
+
   btnSummit.setAttribute('class', 'submit-btn mr-1');
   btnCancel.setAttribute('class', 'submit-btn');
 
-  btnSummit.innerHTML = 'Add Task'
-  btnCancel.innerHTML = 'Cancel'
+  btnSummit.innerHTML = 'Add Task';
+  btnCancel.innerHTML = 'Cancel';
   
   newTask.appendChild(btnSummit);
   newTask.appendChild(btnCancel);
   
 }
 
-function showTasks(elem){
-  let key = elem.dataset.name;
+function changePriority(div) {
+  if (div.className.includes('Normal')) {
+    div.className = div.className.replace('Normal', 'High');
+    div.innerHTML = div.className.substring(13, div.className.length);
+  } else if (div.className.includes('High')) {
+    div.className = div.className.replace('High', 'Low');
+    div.innerHTML = div.className.substring(13, div.className.length);
+  } else {
+    div.className = div.className.replace('Low', 'Normal');
+    div.innerHTML = div.className.substring(13, div.className.length);
+  }
+}
+
+function showTasks(elem) {
+  const key = elem.dataset.name;
 
   displayTasks.innerHTML = '';
 
@@ -85,16 +103,22 @@ function showTasks(elem){
 
   projectSelected.tasks.forEach((task) => {
     const taskDetails = document.createElement('div');
+
     taskDetails.setAttribute('class', 'tasks-list');
     taskDetails.innerHTML += ` <h3 class="tsk-title"> ${task.title} </h3>
       <p><span class="tsk-heading">Description:</span> <span class="tsk-detail">${task.description} </span></p>
       <p><span class="tsk-heading">DueDate:</span> <span class="tsk-detail">${task.dueDate} </span></p>
-      <p><span class="tsk-heading">Priority:</span> <span class="tsk-detail">${task.priority} </span></p>
-      <p><span class="tsk-heading">Notes:</span> <span class="tsk-detail">${task.notes} </span></p>`;
+      <p><span class="tsk-heading">Notes:</span> <span class="tsk-detail">${task.notes} </span></p>
+      <button class="btn-priority ${task.priority}">${task.priority}</button>
+      <button class=""></button>
+      <button class=""></button>`;
     displayTasks.appendChild(taskDetails);
+    const btnPriority = document.querySelector('.btn-priority');
+    btnPriority.addEventListener('click', () => changePriority(btnPriority));
   });
-
 }
+
+
 
 function showProjects() {
   if (localStorage.length == 0) return;
