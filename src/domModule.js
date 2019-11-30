@@ -13,6 +13,9 @@ const submitProject = document.querySelector('#submit-project');
 
 let lsProjects = [];
 const projectsTasks = {};
+const tasks = {};
+// let tskindx = 0;
+
 
 function showProjects() {
   if (localStorage.length == 0) return;
@@ -51,9 +54,9 @@ function addTask(elem) {
     projectSelected.tasks.push(taskValues);
 
     storeTask(projectSelected);
-    const tasks = {};
 
-    taskIndex(lsProjects, tasks, key, taskTitle);
+
+    // tskindx = taskIndex(lsProjects, tasks, key, taskTitle);
 
     taskTitle.value = '';
     description.value = '';
@@ -120,13 +123,19 @@ function setDone(tsk) {
   tsk.classList.toggle('done');
 }
 
-function removeTask(title) {
-  // const zbi = [];
-  // let zbl;
-  // lsProjects.forEach(khra => zbl = khra.tasks);
-  // zbl.forEach(hhh => console.log(hhh))
-  // console.log(lsProjects);
-  // console.log(projectsTasks);
+function removeTask(array, tasks, key, tTitle) {
+  let indx = 0;
+  // const merd = taskIndex(array, tasks, key, tTitle);
+  // array.forEach((item) => {
+  //   if (item.title === key) console.log(item.tasks);
+
+  // });
+
+  array.forEach((item) => {
+    if (item.title === key) tasks = item.tasks;
+  });
+
+  console.log(tasks);
 
 }
 
@@ -164,8 +173,7 @@ function showTasks(elem) {
       el.addEventListener('click', () => changePriority(el));
     });
     tskDone.addEventListener('click', () => setDone(tskTitle));
-    remove.addEventListener('click', () => removeTask(task.title));
-    // projectsTasks = {"title": key};
+    remove.addEventListener('click', () => removeTask(lsProjects, tasks, key, task.title));
   });
 }
 
