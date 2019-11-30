@@ -1,4 +1,4 @@
-import { addProject } from './storage';
+import { addProject, storeTask, taskIndex } from './storage';
 import Task from './tasks';
 
 const clear = document.querySelector('#clear');
@@ -12,21 +12,49 @@ const projectTitle = document.querySelector('#project-title');
 const submitProject = document.querySelector('#submit-project');
 
 let lsProjects = [];
+const projectsTasks = {};
+
+function showProjects() {
+  if (localStorage.length == 0) return;
+  lsProjects = JSON.parse(localStorage.getItem('projects'));
+
+  displayProject.innerHTML = ''; // clear div
+
+  lsProjects.forEach((project) => {
+    const h2 = document.createElement('h2');
+    h2.setAttribute('class', 'project-title');
+    h2.setAttribute('data-name', project.title);
+    h2.innerHTML = project.title;
+    displayProject.appendChild(h2);
+  });
+
+  const projectH2 = document.querySelectorAll('.project-title');
+  projectH2.forEach((elem) => {
+    elem.addEventListener('click', () => showTasks(elem));
+  });
+}
 
 function addTask(elem) {
-    let key = elem.dataset.name;
+    const key = elem.dataset.name;
   
-    const projectSelected = lsProjects.find((item) => item.title == key);
+    const projectSelected = lsProjects.find((item) => item.title === key);
   
     const taskTitle = document.querySelector('#task-title');
     const description = document.querySelector('#description');
     const date = document.querySelector('#date');
     const priority = document.querySelector('#priority');
     const notes = document.querySelector('#notes');
-  
+
+    if (!taskTitle.value) return alert('Task Title must be provided!');
     const taskValues = Task(taskTitle.value, description.value, date.value, priority.value, notes.value);
   
     projectSelected.tasks.push(taskValues);
+
+    storeTask(projectSelected);
+    const tasks = {};
+
+    taskIndex(lsProjects, tasks, key, taskTitle);
+
     taskTitle.value = '';
     description.value = '';
     date.value = '';
@@ -88,9 +116,24 @@ function changePriority(div) {
   }
 }
 
+function setDone(tsk) {
+  tsk.classList.toggle('done');
+}
+
+function removeTask(title) {
+  // const zbi = [];
+  // let zbl;
+  // lsProjects.forEach(khra => zbl = khra.tasks);
+  // zbl.forEach(hhh => console.log(hhh))
+  // console.log(lsProjects);
+  // console.log(projectsTasks);
+
+}
+
 function showTasks(elem) {
   const key = elem.dataset.name;
 
+  // console.log(key);
   displayTasks.innerHTML = '';
 
   const btnNewTask = document.createElement('button');
@@ -99,7 +142,7 @@ function showTasks(elem) {
   btnNewTask.addEventListener('click', () => showTaskForm(elem));
   displayTasks.appendChild(btnNewTask);
 
-  const projectSelected = lsProjects.find((item) => item.title == key);
+  const projectSelected = lsProjects.find((item) => item.title === key);
 
   projectSelected.tasks.forEach((task) => {
     const taskDetails = document.createElement('div');
@@ -110,35 +153,20 @@ function showTasks(elem) {
       <p><span class="tsk-heading">DueDate:</span> <span class="tsk-detail">${task.dueDate} </span></p>
       <p><span class="tsk-heading">Notes:</span> <span class="tsk-detail">${task.notes} </span></p>
       <button class="btn-priority ${task.priority}">${task.priority}</button>
-      <button class=""></button>
-      <button class=""></button>`;
+      <button class="btn-done">Done</button>
+      <button class="btn-remove">remove</button>`;
     displayTasks.appendChild(taskDetails);
-    const btnPriority = document.querySelector('.btn-priority');
-    btnPriority.addEventListener('click', () => changePriority(btnPriority));
+    const tskDone = document.querySelector('.btn-done');
+    const btnPriority = document.querySelectorAll('.btn-priority');
+    const tskTitle = document.querySelector('.tsk-title');
+    const remove = document.querySelector('.btn-remove');
+    btnPriority.forEach((el) => {
+      el.addEventListener('click', () => changePriority(el));
+    });
+    tskDone.addEventListener('click', () => setDone(tskTitle));
+    remove.addEventListener('click', () => removeTask(task.title));
+    // projectsTasks = {"title": key};
   });
-}
-
-
-
-function showProjects() {
-  if (localStorage.length == 0) return;
-  lsProjects = JSON.parse(localStorage.getItem('projects'));
-
-  displayProject.innerHTML = ''; // clear div
-
-  lsProjects.forEach((project) => {
-    const h2 = document.createElement('h2');
-    h2.setAttribute('class', 'project-title');
-    h2.setAttribute('data-name', project.title );
-    h2.innerHTML = project.title;
-    displayProject.appendChild(h2);
-  });
-
-  const projectH2 = document.querySelectorAll('.project-title');
-  projectH2.forEach((elem) => {
-    elem.addEventListener('click', () => showTasks(elem));
-  });
-
 }
 
 submitProject.addEventListener('click', addProject);
