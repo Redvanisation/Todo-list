@@ -1,28 +1,25 @@
-import { projectTitle, showProjects, newTask, lsProjects } from './domModule';
-import Project from './project';
+const storeProject = (projectTitle) => {
+  localStorage.setItem(projectTitle, JSON.stringify([]));
+};
 
-function addProject() {
-    if (!projectTitle.value) return alert('Title must be provided!');
-    const project = Project(projectTitle.value);
+const getProjects = (p) => localStorage.getItem(p);
+
+const storeTodo = (project, todo) => {
+  localStorage.setItem(project, JSON.stringify(todo));
+};
+
+const storeEditTodos = (project, todo) => {
+  localStorage.setItem(project, JSON.stringify(todo));
+};
+
+const deleteTodo = () => {
   
-    lsProjects.push(project);
-    
-    localStorage.setItem('projects', JSON.stringify(lsProjects));
-    return showProjects();
-  }
+};
 
-function storeTask(array) {
-  localStorage.setItem('projects', JSON.stringify(array));
-}
 
-function taskIndex(array, subArr, projectKey, taskKey) {
-  array.find((item) => {
-    if (item.title === projectKey) subArr = item.tasks;
-  });
-
-  subArr.find((task) => {
-    if (task.title === taskKey.value) return subArr.indexOf(task);
-  });
-}
-
-export { addProject, storeTask, taskIndex };
+export {
+  storeProject,
+  getProjects,
+  storeTodo,
+  storeEditTodos,
+};
