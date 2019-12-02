@@ -55,14 +55,6 @@ const showEditForm = (title) => {
   currentTodo = title;
 };
 
-// const isSure = (title) => {
-//   toDltTodo = '';
-//   toDltTodo = title;
-//   showForm(areSure);
-// };
-
-
-
 // Empty the todos container, get the todos array from the storage,
 // loop through it and append a div with its content to the todos container
 const displayTodos = () => {
@@ -106,16 +98,14 @@ const addProject = () => {
 
 // Displaying the Added project as soon as it's added to the local storage
 const displayProjects = () => {
-
-
-  const projectsTitles = Object.keys(localStorage);
+  const projects = getProjects();
   projectsDiv.innerHTML = '';
 
-  projectsTitles.forEach((pTitle) => {
+  projects.forEach((project) => {
     const projectsContainer = document.createElement('div');
     projectsContainer.setAttribute('class', 'projects-container');
     projectsContainer.innerHTML = `
-      <h2 class="project-title">${pTitle}</h2>
+      <h2 class="project-title">${project}</h2>
     `;
     projectsDiv.appendChild(projectsContainer);
   });
@@ -127,17 +117,17 @@ const displayProjects = () => {
   // Calling the display todo function to show the todos on every click on a project title
   // Displaying the add new tasks button after clicking on the project's title
   
-    pjTitles.forEach((title) => {
-      title.addEventListener('click', () => {
-        currentProject = title.textContent;
-        todoTasks = JSON.parse(localStorage.getItem(currentProject));
-        projectTodoH2.textContent = currentProject;
-        displayTodos();
-        showForm(nTasksBtn);
-        showForm(pRemoveBtn);
-        showForm(todoContainer);
-      });
+  pjTitles.forEach((title) => {
+    title.addEventListener('click', () => {
+      currentProject = title.textContent;
+      todoTasks = JSON.parse(localStorage.getItem(currentProject));
+      projectTodoH2.textContent = currentProject;
+      displayTodos();
+      showForm(nTasksBtn);
+      showForm(pRemoveBtn);
+      showForm(todoContainer);
     });
+  });
   
 };
 
@@ -202,27 +192,10 @@ const removeTodos = () => {
 
 const handleRemoveProject = () => {
   removeProject(currentProject);
-  
-  const proj = JSON.parse(localStorage.getItem(currentProject));
   hideForm(todoContainer);
-
-  projectsDiv.innerHTML = '';
-  currentProject = '';
   hideForm(projectDelConfirm)
-
-  if (proj) {
-    proj.forEach((p) => {
-      const projectsContainer = document.createElement('div');
-      projectsContainer.setAttribute('class', 'projects-container');
-      projectsContainer.innerHTML = `
-        <h2 class="project-title">${p.title}</h2>
-      `;
-      projectsDiv.appendChild(projectsContainer);
-    });
-  }
+  currentProject = '';
   displayProjects();
- 
-  
 }
 
 pTitleBtn.addEventListener('click', addProject);
@@ -232,6 +205,7 @@ submitForm.addEventListener('click', addTodo);
 submitForm.addEventListener('click', displayTodos);
 nTasksBtn.addEventListener('click', () => showNewForm(TodoFormDiv, submitForm, editForm));
 editForm.addEventListener('click', editTodo);
+
 yess.addEventListener('click', removeTodos);
 noo.addEventListener('click', () => hideForm(areSure));
 
@@ -243,4 +217,4 @@ noP.addEventListener('click', () => hideForm(projectDelConfirm));
 
 // pRemoveBtn.addEventListener('click', handleRemoveProject);
 
-export default addProject;
+export {addProject, displayProjects};
