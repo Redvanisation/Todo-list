@@ -106,14 +106,20 @@ const addProject = () => {
 
 // Displaying the Added project as soon as it's added to the local storage
 const displayProjects = () => {
-  const projectsContainer = document.createElement('div');
-  projectsContainer.setAttribute('class', 'projects-container');
-  projectsContainer.innerHTML = `
-    <h2 class="project-title">${pTitleinput.value}</h2>
-  `;
-  projectsDiv.appendChild(projectsContainer);
 
 
+  const projectsTitles = Object.keys(localStorage);
+  projectsDiv.innerHTML = '';
+
+  projectsTitles.forEach((pTitle) => {
+    const projectsContainer = document.createElement('div');
+    projectsContainer.setAttribute('class', 'projects-container');
+    projectsContainer.innerHTML = `
+      <h2 class="project-title">${pTitle}</h2>
+    `;
+    projectsDiv.appendChild(projectsContainer);
+  });
+  
   const pjTitles = document.querySelectorAll('.project-title');
   // Displaying the projects / setting the current project var to the title's content
   // setting the todo array to the list of project's task on each click on the project title
@@ -196,21 +202,26 @@ const removeTodos = () => {
 
 const handleRemoveProject = () => {
   removeProject(currentProject);
+  
   const proj = JSON.parse(localStorage.getItem(currentProject));
   hideForm(todoContainer);
-  console.log(todoContainer);
+
   projectsDiv.innerHTML = '';
   currentProject = '';
   hideForm(projectDelConfirm)
-  if (!proj) return;
-  proj.forEach((p) => {
-    const projectsContainer = document.createElement('div');
-    projectsContainer.setAttribute('class', 'projects-container');
-    projectsContainer.innerHTML = `
-      <h2 class="project-title">${p.title}</h2>
-    `;
-    projectsDiv.appendChild(projectsContainer);
-  });
+
+  if (proj) {
+    proj.forEach((p) => {
+      const projectsContainer = document.createElement('div');
+      projectsContainer.setAttribute('class', 'projects-container');
+      projectsContainer.innerHTML = `
+        <h2 class="project-title">${p.title}</h2>
+      `;
+      projectsDiv.appendChild(projectsContainer);
+    });
+  }
+  displayProjects();
+ 
   
 }
 
