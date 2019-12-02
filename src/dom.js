@@ -1,5 +1,5 @@
 import { storeProject, getProjects, storeTodo, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, isSure } from './helpers';
+import { showForm, hideForm, showHide, showNewForm} from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -81,7 +81,7 @@ const displayTodos = () => {
 
     const btnsDelete = document.querySelectorAll('#btn-delete-todo');
     btnsDelete.forEach((btn) => {
-      btn.addEventListener('click', () => isSure(toDltTodo, btn.dataset.delete, areSure));
+      btn.addEventListener('click', () => showForm(areSure));
     });
   });
 };
@@ -214,7 +214,5 @@ cons.addEventListener('click', displayTodos);
 pRemoveBtn.addEventListener('click', () => showForm(projectDelConfirm));
 yesP.addEventListener('click', handleRemoveProject);
 noP.addEventListener('click', () => hideForm(projectDelConfirm));
-
-// pRemoveBtn.addEventListener('click', handleRemoveProject);
 
 export {addProject, displayProjects};

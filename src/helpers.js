@@ -16,16 +16,9 @@ const showHide = (cls) => {
   cls.classList.toggle('hidden');
 };
 
-const isSure = (vrb, title, elem) => {
-  vrb = '';
-  vrb = title;
-  showForm(elem);
-};
-
 export {
   showForm,
   hideForm,
   showHide,
   showNewForm,
-  isSure,
 };
