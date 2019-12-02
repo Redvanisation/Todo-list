@@ -1,4 +1,4 @@
-const showFrom = (cls) => {
+const showForm = (cls) => {
   cls.classList.remove('hidden');
 };
 
@@ -16,9 +16,16 @@ const showHide = (cls) => {
   cls.classList.toggle('hidden');
 };
 
+const isSure = (vrb, title, elem) => {
+  vrb = '';
+  vrb = title;
+  showForm(elem);
+};
+
 export {
-  showFrom,
+  showForm,
   hideForm,
   showHide,
   showNewForm,
+  isSure,
 };

@@ -54,6 +54,12 @@
                 <button class="submit-btn" id="btn-yes">Yes</button>
             </div>
 
+            <div class="new-task hidden" id="project-del-confirm">
+                <h3 class="title">Are you sure?</h3><br>
+                <button class="submit-btn" id="btn-p-no">No</button>
+                <button class="submit-btn" id="btn-p-yes">Yes</button>
+            </div>
+
             <!-- <div id="edit-task" class="new-task hidden">
                     <input type="text" placeholder="Title" id="task-title" class="task-title input" required><br>
                     <input type="text" placeholder="Description" id="task-description" class="task-description input"><br>
@@ -71,8 +77,9 @@
                 </div> -->
 
 
-            <div class="display-tasks col-md-8 text-center">
+            <div id="todo-container" class="display-tasks col-md-8 text-center">
                 <h2 id="task-project-h2"></h2>
+                <button id="delete-project-btn" class="submit-btn hidden">Delete</button>
                 <button id="new-task-btn" class="btn new-task-btn hidden">New Task</button>
                 <div id="display-tasks"></div>
                 <!-- <div class="tasks-list">

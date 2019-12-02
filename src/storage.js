@@ -12,8 +12,8 @@ const storeEditTodos = (project, todo) => {
   localStorage.setItem(project, JSON.stringify(todo));
 };
 
-const deleteTodo = () => {
-  
+const removeProject = (project) => {
+  localStorage.removeItem(project);
 };
 
 
@@ -22,4 +22,5 @@ export {
   getProjects,
   storeTodo,
   storeEditTodos,
+  removeProject,
 };
