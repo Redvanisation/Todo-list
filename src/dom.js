@@ -82,7 +82,6 @@ const displayTodos = () => {
 
     const btnsDelete = document.querySelectorAll('#btn-delete-todo');
     btnsDelete.forEach((btn) => {
-      // currentTodo = btn.dataset.name;
       btn.addEventListener('click', () => isSure(btn.dataset.delete));
     });
   });
@@ -164,16 +163,13 @@ const editTodo = () => {
   todoPriorityInput.value = 0;
   todoNotesInput.value = '';
 
-  showFrom(submitForm);
-  hideForm(editForm);
   hideForm(TodoFormDiv);
   displayTodos();
 };
 
 const removeTodos = () => {
-
   const theTasks = todoTasks;
-  let ind = '';
+  let ind = 0;
 
   theTasks.forEach((todo) => {
     if (todo.title === toDltTodo) {

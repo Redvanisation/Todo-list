@@ -5,4 +5,3 @@ document.body.addEventListener('DOMCotentLoad', () => {
   // addProject();
   // console.log('localStorage');
 });
-
