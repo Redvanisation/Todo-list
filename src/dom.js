@@ -8,7 +8,7 @@ const pTitleBtn = document.querySelector('#submit-project');
 const pRemoveBtn = document.querySelector('#delete-project-btn');
 
 // Show project inputs
-const projectsDiv = document.querySelector('#display-project');
+const projectsDiv = document.querySelector('#display-projects');
 
 // Todos From
 const TodoFormDiv = document.querySelector('#new-task');
@@ -106,12 +106,10 @@ const addProject = () => {
 
 // Displaying the Added project as soon as it's added to the local storage
 const displayProjects = () => {
-  const projectsContainer = document.createElement('div');
-  projectsContainer.setAttribute('class', 'projects-container');
-  projectsContainer.innerHTML = `
-    <h2 class="project-title">${pTitleinput.value}</h2>
-  `;
-  projectsDiv.appendChild(projectsContainer);
+  const projectContainer = document.createElement('h2');
+  projectContainer.setAttribute('class', 'project-title');
+  projectContainer.textContent = pTitleinput.value;
+  projectsDiv.appendChild(projectContainer);
 
 
   const pjTitles = document.querySelectorAll('.project-title');
@@ -120,19 +118,17 @@ const displayProjects = () => {
   // setting the title of the active project to the clicked project
   // Calling the display todo function to show the todos on every click on a project title
   // Displaying the add new tasks button after clicking on the project's title
-  
-    pjTitles.forEach((title) => {
-      title.addEventListener('click', () => {
-        currentProject = title.textContent;
-        todoTasks = JSON.parse(localStorage.getItem(currentProject));
-        projectTodoH2.textContent = currentProject;
-        displayTodos();
-        showForm(nTasksBtn);
-        showForm(pRemoveBtn);
-        showForm(todoContainer);
-      });
+  pjTitles.forEach((title) => {
+    title.addEventListener('click', () => {
+      currentProject = title.textContent;
+      todoTasks = JSON.parse(localStorage.getItem(currentProject));
+      projectTodoH2.textContent = currentProject;
+      displayTodos();
+      showForm(nTasksBtn);
+      showForm(pRemoveBtn);
+      showForm(todoContainer);
     });
-  
+  });
 };
 
 /* Get the values from the form input and push it into the todos array,
@@ -195,24 +191,22 @@ const removeTodos = () => {
 };
 
 const handleRemoveProject = () => {
-  removeProject(currentProject);
-  const proj = JSON.parse(localStorage.getItem(currentProject));
-  hideForm(todoContainer);
-  console.log(todoContainer);
   projectsDiv.innerHTML = '';
-  currentProject = '';
-  hideForm(projectDelConfirm)
+  const proj = JSON.parse(localStorage.getItem(currentProject));
+  removeProject(currentProject);
+  hideForm(todoContainer);
+
+  // currentProject = '';
+  hideForm(projectDelConfirm);
+
   if (!proj) return;
   proj.forEach((p) => {
-    const projectsContainer = document.createElement('div');
-    projectsContainer.setAttribute('class', 'projects-container');
-    projectsContainer.innerHTML = `
-      <h2 class="project-title">${p.title}</h2>
-    `;
+    const projectsContainer = document.createElement('h2');
+    projectsContainer.setAttribute('class', 'project-title');
+    projectsDiv.textContent = p.title;
     projectsDiv.appendChild(projectsContainer);
   });
-  
-}
+};
 
 pTitleBtn.addEventListener('click', addProject);
 pTitleBtn.addEventListener('click', displayProjects);
