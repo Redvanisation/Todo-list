@@ -69,6 +69,13 @@ body {
     padding: 2rem 0;
     cursor: pointer;
     transition: all .3s;
+    text-transform: capitalize;
+}
+
+#task-project-h2{
+    text-transform: capitalize;
+    display: inline-block;
+    margin: 1rem auto;
 }
 
 .project-title:hover {
@@ -139,7 +146,6 @@ body {
 
 .btn-delete {
     position: relative;
-    /* z-index: 20; */
     background-color: orange;
     color: white;
     border: 2px solid #fff;
@@ -177,14 +183,6 @@ body {
     justify-content: center;
 }
 
-/* .done-div {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    z-index: 10;
-} */
-
 .disabled {
     pointer-events: none;
 }
@@ -196,4 +194,14 @@ body {
 .done-done {
     background-color: rgba(255, 165, 0,.5);
     color: #555;
+}
+
+.todo-titles{
+    font-weight: bold;
+}
+
+.todo-h3{
+    text-transform: capitalize;
+    letter-spacing: 3px;
+    text-decoration: underline;
 }

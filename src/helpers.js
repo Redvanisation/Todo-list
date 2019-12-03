@@ -36,6 +36,7 @@ const disabledDiv = (one) => {
   });
 };
 
+const showMessage = (msg) => alert(msg);
 
 export {
   showForm,
@@ -43,4 +44,5 @@ export {
   showHide,
   showNewForm,
   disabledDiv,
+  showMessage,
 };

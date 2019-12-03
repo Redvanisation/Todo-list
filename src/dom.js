@@ -1,5 +1,5 @@
 import { storeProject, getProjects, storeTodo, storeEditTodos, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, disabledDiv } from './helpers';
+import { showForm, hideForm, showHide, showNewForm, disabledDiv, showMessage } from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -93,26 +93,21 @@ const displayTodos = () => {
     
     todoDiv.innerHTML = `
       <div id="done-div"></div>
-      <h3 class="task-title" id="todo-title">Title: ${todo.title}</h3>
-      <p class="task-description">Description: ${todo.description}</p>
-      <p class="task-date">Date: ${todo.date}</p>
-      <p class="task-priority">Priority: ${todo.priority}</p>
-      <p class="task-notes">Notes: ${todo.notes}</p>
+      <h3 class="task-title" id="todo-title"><span class="todo-h3"> ${todo.title} </span></h3>
+      <p class="task-description"><span class="todo-titles"> Description:</span> ${todo.description}</p>
+      <p class="task-date"><span class="todo-titles">Date:</span> ${todo.date}</p>
+      <p class="task-priority"><span class="todo-titles">Priority:</span> ${todo.priority}</p>
+      <p class="task-notes"><span class="todo-titles">Notes:</span> ${todo.notes}</p>
       <button id="btn-edit-todo" class="submit-btn card-btn" data-name="${todo.title}">Edit</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
       `;
 
-      
-      
-      displayTodosDiv.appendChild(todoDiv);
-
-      todoDiv.appendChild(btnDone());
+    displayTodosDiv.appendChild(todoDiv);
+    todoDiv.appendChild(btnDone());
 
     const doneBtn = document.querySelectorAll('#done');
     const cards = document.querySelectorAll('#tasks-list');
 
-
-    
     cards.forEach((card) => {
       const priorityBtn = card.querySelector('#btn-priority');
       if (done === true) priorityBtn.classList.add('hidden');
@@ -133,6 +128,9 @@ const displayTodos = () => {
 
 // Creating a new instance of the project then calling the local storage function
 const addProject = () => {
+  if (pTitleinput.value === '') {
+    return showMessage('Project title required.');
+  }
   const project = new Todo();
   project.project = pTitleinput.value;
   storeProject(project.project);
@@ -163,7 +161,7 @@ const displayProjects = () => {
     title.addEventListener('click', () => {
       currentProject = title.textContent;
       todoTasks = JSON.parse(localStorage.getItem(currentProject));
-      projectTodoH2.textContent = currentProject;
+      projectTodoH2.textContent = `Current Project: ${currentProject}`;
       displayTodos();
       showForm(nTasksBtn);
       showForm(pRemoveBtn);
@@ -177,6 +175,15 @@ then empty the inputs and call the local storage function to save the array into
 then hide call the function to hide the form at last */
 
 const addTodo = () => {
+  if (todoTitleInput.value == '') {
+    return showMessage('Title of task required.')
+  } 
+  if (todoDescriptionInput.value == '') {
+    return showMessage('Description of task required.')
+  } 
+  if (todoDateInput.value == '') {
+    return showMessage('DateDue of task required.')
+  }
   const project = new Todo(currentProject, todoTitleInput.value,
     todoDescriptionInput.value, todoDateInput.value, todoPriorityInput.value, todoNotesInput.value);
 
@@ -193,6 +200,16 @@ const addTodo = () => {
 
 
 const editTodo = () => {
+  if (todoTitleInput.value == '') {
+    return showMessage('Title of task required.')
+  } 
+  if (todoDescriptionInput.value == '') {
+    return showMessage('Description of task required.')
+  } 
+  if (todoDateInput.value == '') {
+    return showMessage('DateDue of task required.')
+  }
+
   todoTasks.forEach((todo) => {
     if (todo.title === currentTodo) {
       todo.title = todoTitleInput.value;
