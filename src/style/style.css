@@ -151,12 +151,12 @@ body {
     color: #fff;
 }
 
-
-.btn-done {
-    
-    
-}
-
 .done {
     text-decoration: line-through;;
+}
+
+.project-btns-container {
+    display: flex;
+    justify-content: center;
+    
 }

@@ -23,9 +23,7 @@
 
             <!-- Display elements -->
         <div class="projects-container row">
-            <div id='display-projects' class="display-projects col-md-4 text-center">
-                <!-- <h2 class="project-title">Project 1</h2> -->
-            </div>
+            <div id='display-projects' class="display-projects col-md-4 text-center"></div>
 
             <div id="new-task" class="new-task hidden">
                 <input type="text" placeholder="Title" id="task-title" class="task-title input" required><br>
@@ -56,36 +54,16 @@
                 <button class="submit-btn" id="btn-p-yes">Yes</button>
             </div>
 
-            <!-- <div id="edit-task" class="new-task hidden">
-                    <input type="text" placeholder="Title" id="task-title" class="task-title input" required><br>
-                    <input type="text" placeholder="Description" id="task-description" class="task-description input"><br>
-                    <input type="date" id="task-date" class="task-date input"><br>
-                    <label id="checkbox-label" class="task-label input">High Priority:</label>
-                    <select id="task-priority" class="task-options input">
-                        <option value="0" class="task-option" selected>Low</option> 
-                        <option value="1" class="task-option">Normal</option>
-                        <option value="2" class="task-option">High</option>
-                    </select><br>
-                    <textarea name="notes" id="task-notes" class="task-notes input" cols="30" rows="10"></textarea><br>
-                    </br>
-                    <button id="form-btn-edit" class="submit-btn mr-1">Edit</button>
-                    <button id="form-btn-cancel" class="submit-btn">Cancel</button>
-                </div> -->
-
 
             <div id="todo-container" class="display-tasks col-md-8 text-center">
                 <h2 id="task-project-h2"></h2>
-                <button id="delete-project-btn" class="submit-btn hidden">Delete</button>
-                <button id="new-task-btn" class="btn new-task-btn hidden">New Task</button>
+                <div class="project-btns-container mt-3">
+                    <button id="new-task-btn" class="btn submit-btn new-task-btn hidden">New Task</button>
+                    <button id="delete-project-btn" class="submit-btn ml-2 hidden">Delete</button>
+                </div>
                 <div id="display-tasks"></div>
-                <!-- <div class="tasks-list">
-                    <h3 class="task-title">task1</h3>
-                    <p class="task-description">Description</p>
-                    <p class="task-date">01/10/1988</p>
-                    <p class="task-notes">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quaerat totam molestias sint, ea excepturi, vitae quae atque error ipsum quia reprehenderit perspiciatis deserunt est, quod sapiente consequuntur qui. Deserunt.</p>
-                </div> -->
+
             </div>
-            <button id="console">Console</button>
         </div>
     </main>
 

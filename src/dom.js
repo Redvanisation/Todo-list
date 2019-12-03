@@ -1,5 +1,5 @@
 import { storeProject, getProjects, storeTodo, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, isSure } from './helpers';
+import { showForm, hideForm, showHide, showNewForm} from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -28,6 +28,7 @@ const todoNotesInput = document.querySelector('#task-notes');
 // Display Todos
 const displayTodosDiv = document.querySelector('#display-tasks');
 const todoContainer = document.querySelector('#todo-container');
+
 // Misc
 const areSure = document.querySelector('#are-sure');
 const yess = document.querySelector('#btn-yes');
@@ -45,7 +46,7 @@ let toDltTodo = '';
 
 
 // test button
-const cons = document.querySelector('#console');
+// const cons = document.querySelector('#console');
 
 const showEditForm = (title) => {
   currentTodo = '';
@@ -54,14 +55,6 @@ const showEditForm = (title) => {
   hideForm(submitForm);
   currentTodo = title;
 };
-
-// const isSure = (title) => {
-//   toDltTodo = '';
-//   toDltTodo = title;
-//   showForm(areSure);
-// };
-
-
 
 // Empty the todos container, get the todos array from the storage,
 // loop through it and append a div with its content to the todos container
@@ -89,7 +82,7 @@ const displayTodos = () => {
 
     const btnsDelete = document.querySelectorAll('#btn-delete-todo');
     btnsDelete.forEach((btn) => {
-      btn.addEventListener('click', () => isSure(toDltTodo, btn.dataset.delete, areSure));
+      btn.addEventListener('click', () => showForm(areSure));
     });
   });
 };
@@ -106,11 +99,15 @@ const addProject = () => {
 
 // Displaying the Added project as soon as it's added to the local storage
 const displayProjects = () => {
-  const projectContainer = document.createElement('h2');
-  projectContainer.setAttribute('class', 'project-title');
-  projectContainer.textContent = pTitleinput.value;
-  projectsDiv.appendChild(projectContainer);
+  const projects = getProjects();
+  projectsDiv.innerHTML = '';
 
+  projects.forEach((project) => {
+    const projectsContainer = document.createElement('h2');
+    projectsContainer.setAttribute('class', 'project-title');
+    projectsContainer.textContent = project;
+    projectsDiv.appendChild(projectsContainer);
+  });
 
   const pjTitles = document.querySelectorAll('.project-title');
   // Displaying the projects / setting the current project var to the title's content
@@ -118,6 +115,7 @@ const displayProjects = () => {
   // setting the title of the active project to the clicked project
   // Calling the display todo function to show the todos on every click on a project title
   // Displaying the add new tasks button after clicking on the project's title
+
   pjTitles.forEach((title) => {
     title.addEventListener('click', () => {
       currentProject = title.textContent;
@@ -191,21 +189,11 @@ const removeTodos = () => {
 };
 
 const handleRemoveProject = () => {
-  projectsDiv.innerHTML = '';
-  const proj = JSON.parse(localStorage.getItem(currentProject));
   removeProject(currentProject);
   hideForm(todoContainer);
-
-  // currentProject = '';
   hideForm(projectDelConfirm);
-
-  if (!proj) return;
-  proj.forEach((p) => {
-    const projectsContainer = document.createElement('h2');
-    projectsContainer.setAttribute('class', 'project-title');
-    projectsDiv.textContent = p.title;
-    projectsDiv.appendChild(projectsContainer);
-  });
+  currentProject = '';
+  displayProjects();
 };
 
 pTitleBtn.addEventListener('click', addProject);
@@ -215,15 +203,17 @@ submitForm.addEventListener('click', addTodo);
 submitForm.addEventListener('click', displayTodos);
 nTasksBtn.addEventListener('click', () => showNewForm(TodoFormDiv, submitForm, editForm));
 editForm.addEventListener('click', editTodo);
+
 yess.addEventListener('click', removeTodos);
 noo.addEventListener('click', () => hideForm(areSure));
 
-cons.addEventListener('click', displayTodos);
+// cons.addEventListener('click', displayTodos);
 
 pRemoveBtn.addEventListener('click', () => showForm(projectDelConfirm));
 yesP.addEventListener('click', handleRemoveProject);
 noP.addEventListener('click', () => hideForm(projectDelConfirm));
 
-// pRemoveBtn.addEventListener('click', handleRemoveProject);
-
-export default addProject;
+export {
+  addProject,
+  displayProjects,
+};
