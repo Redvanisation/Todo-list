@@ -16,11 +16,9 @@ const showHide = (cls) => {
   cls.classList.toggle('hidden');
 };
 
-const setDoneStyle = (elem, card, dv) => {
-  elem.style.textDecoration = 'line-through';
-  // card.style.backgroundColor = 'rgba(255, 165, 0,.5)';
-  dv.style.backgroundColor = 'rgba(255, 165, 0,.5)';
-  dv.style.zIndex = 10;
+const setDoneStyle = (elem) => {
+  // elem.style.textDecoration = 'line-through';
+  elem.classList.toggle('done-done');
 };
 
 const handlePriority = (num) => {

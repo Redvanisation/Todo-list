@@ -1,4 +1,4 @@
-import { storeProject, getProjects, storeTodo, removeProject } from './storage';
+import { storeProject, getProjects, storeTodo, storeEditTodos, removeProject } from './storage';
 import { showForm, hideForm, showHide, showNewForm, handlePriority, setDoneStyle } from './helpers';
 import Todo from './todo';
 
@@ -44,6 +44,7 @@ let todoTasks = [];
 let currentTodo = '';
 let toDltTodo = '';
 let doneTitle = '';
+let done = false;
 
 
 // test button
@@ -67,41 +68,54 @@ const setDone = (title) => {
 // loop through it and append a div with its content to the todos container
 const displayTodos = () => {
   displayTodosDiv.innerHTML = '';
+
+  const btnDone = (doneDiv) => {
+    const one = document.createElement('button');
+    one.setAttribute('class', 'submit-btn');
+    one.addEventListener('click', () => {
+      // setDoneStyle(one.parentNode);
+      doneDiv.classList.toggle('done-div');
+    });
+    one.innerHTML = 'Done/Undone';
+    return one;
+  };
+
   const todos = JSON.parse(localStorage.getItem(currentProject));
   todos.forEach((todo) => {
     const todoDiv = document.createElement('div');
     todoDiv.setAttribute('class', 'tasks-list');
+    todoDiv.setAttribute('id', 'tasks-list');
+    
     let prio = todo.priority;
+
     todoDiv.innerHTML = `
-      <div class="done-div"></div>
+      <div id="done-div"></div>
       <h3 class="task-title" id="todo-title">Title: ${todo.title}</h3>
       <p class="task-description">Description: ${todo.description}</p>
       <p class="task-date">Date: ${todo.date}</p>
       <p class="task-notes">Notes: ${todo.notes}</p>
       <button id="btn-edit-todo" class="submit-btn" data-name="${todo.title}">Edit</button>
+      <button class="submit-btn" id="btn-priority">Priority: ${handlePriority(prio)}</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
-      <button class="submit-btn">Priority: ${handlePriority(prio)}</button>
       `;
+
       // console.log(handlePriority(todo.priority));
       // <button id="btn-delete-todo" class="submit-btn">Priority: ${handlePriority(todo.priority)}</button>
-    displayTodosDiv.appendChild(todoDiv);
+      displayTodosDiv.appendChild(todoDiv);
+      const doneDiv = document.querySelector('#done-div');
 
-    const todoCards = document.querySelectorAll('.tasks-list');
+      todoDiv.appendChild(btnDone(doneDiv));
+
+    const doneBtn = document.querySelectorAll('#done');
+    const cards = document.querySelectorAll('#tasks-list');
+
+
     
-    todoCards.forEach((card) => {
-      const todoTitle = card.querySelector('#todo-title');
-      const doneDiv = card.querySelector('.done-div');
-      // if (todo.done === true) setDoneStyle(todoTitle, card, doneDiv);
-      // card.addEventListener('click', () => setDoneStyle(todoTitle, card, doneDiv));
-      card.addEventListener('click', () => {
-        todo.done = true;
-        if (todo.done === true) console.log('TRUE!!!');
-      });
-
-      // card.addEventListener('click', () => console.log(todoTitle));
+    cards.forEach((card) => {
+      const priorityBtn = card.querySelector('#btn-priority');
+      if (done === true) priorityBtn.classList.add('hidden');
     });
-
-
+    
     const btnsEdit = document.querySelectorAll('#btn-edit-todo');
     btnsEdit.forEach((btn) => {
       btn.addEventListener('click', () => showEditForm(btn.dataset.name));
