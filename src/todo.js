@@ -1,6 +1,6 @@
 class Todo {
   constructor(project, title, description, date = new Date().toLocaleString().substring(0, 10),
-    priority = 0, notes) {
+    priority = 'Normal', notes) {
     this.project = project;
     this.title = title;
     this.description = description;

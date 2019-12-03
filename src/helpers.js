@@ -36,28 +36,11 @@ const disabledDiv = (one) => {
   });
 };
 
-const handlePriority = (num) => {
-  switch (num) {
-    case 0:
-      num = 'Low';
-      break;
-    case 1:
-      num = 'Normal';
-      break;
-    case 2:
-      num = 'High';
-      break;
-    default:
-      num = 'Normal';
-  }
-  return num;
-};
 
 export {
   showForm,
   hideForm,
   showHide,
   showNewForm,
-  handlePriority,
   disabledDiv,
 };

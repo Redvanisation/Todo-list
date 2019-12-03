@@ -1,5 +1,5 @@
 import { storeProject, getProjects, storeTodo, storeEditTodos, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, handlePriority, disabledDiv } from './helpers';
+import { showForm, hideForm, showHide, showNewForm, disabledDiv } from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -77,8 +77,16 @@ const displayTodos = () => {
     return one;
   };
 
+  // const btnPriority = () => {
+  //   const prio = document.createElement('button');
+  //   prio.setAttribute('class', 'submit-btn');
+  //   prio.addEventListener('click', () => changePriority(prio));
+
+  // }
+
   const todos = JSON.parse(localStorage.getItem(currentProject));
   todos.forEach((todo) => {
+
     const todoDiv = document.createElement('div');
     todoDiv.setAttribute('class', 'tasks-list');
     todoDiv.setAttribute('id', 'tasks-list');
@@ -88,14 +96,14 @@ const displayTodos = () => {
       <h3 class="task-title" id="todo-title">Title: ${todo.title}</h3>
       <p class="task-description">Description: ${todo.description}</p>
       <p class="task-date">Date: ${todo.date}</p>
+      <p class="task-priority">Priority: ${todo.priority}</p>
       <p class="task-notes">Notes: ${todo.notes}</p>
       <button id="btn-edit-todo" class="submit-btn card-btn" data-name="${todo.title}">Edit</button>
-      <button class="submit-btn card-btn" id="btn-priority">Priority: ${handlePriority(todo.priority)}</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
       `;
 
-      console.log(handlePriority(todo.priority));
-      // <button id="btn-delete-todo" class="submit-btn">Priority: ${handlePriority(todo.priority)}</button>
+      
+      
       displayTodosDiv.appendChild(todoDiv);
 
       todoDiv.appendChild(btnDone());
@@ -176,7 +184,7 @@ const addTodo = () => {
   todoTitleInput.value = '';
   todoDescriptionInput.value = '';
   todoDateInput.value = '';
-  todoPriorityInput.value = 0;
+  todoPriorityInput.value = 'Normal';
   todoNotesInput.value = '';
 
   storeTodo(project.project, todoTasks);
@@ -200,7 +208,7 @@ const editTodo = () => {
   todoTitleInput.value = '';
   todoDescriptionInput.value = '';
   todoDateInput.value = '';
-  todoPriorityInput.value = 0;
+  todoPriorityInput.value = 'Normal';
   todoNotesInput.value = '';
 
   hideForm(TodoFormDiv);
