@@ -37,7 +37,6 @@ const disabledDiv = (one) => {
 };
 
 const handlePriority = (num) => {
-  
   switch (num) {
     case 0:
       num = 'Low';
@@ -48,14 +47,9 @@ const handlePriority = (num) => {
     case 2:
       num = 'High';
       break;
+    default:
+      num = 'Normal';
   }
-  // if (num === 0) {
-  //   num = 'Low';
-  // } else if (num === 1) {
-  //   num = 'Normal';
-  // } else {
-  //   num = 'High';
-  // }
   return num;
 };
 

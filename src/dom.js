@@ -83,8 +83,6 @@ const displayTodos = () => {
     todoDiv.setAttribute('class', 'tasks-list');
     todoDiv.setAttribute('id', 'tasks-list');
     
-    let prio = todo.priority;
-
     todoDiv.innerHTML = `
       <div id="done-div"></div>
       <h3 class="task-title" id="todo-title">Title: ${todo.title}</h3>
@@ -92,11 +90,11 @@ const displayTodos = () => {
       <p class="task-date">Date: ${todo.date}</p>
       <p class="task-notes">Notes: ${todo.notes}</p>
       <button id="btn-edit-todo" class="submit-btn card-btn" data-name="${todo.title}">Edit</button>
-      <button class="submit-btn card-btn" id="btn-priority">Priority: ${handlePriority(prio)}</button>
+      <button class="submit-btn card-btn" id="btn-priority">Priority: ${handlePriority(todo.priority)}</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
       `;
 
-      // console.log(handlePriority(todo.priority));
+      console.log(handlePriority(todo.priority));
       // <button id="btn-delete-todo" class="submit-btn">Priority: ${handlePriority(todo.priority)}</button>
       displayTodosDiv.appendChild(todoDiv);
 
