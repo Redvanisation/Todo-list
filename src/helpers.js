@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 /* eslint-disable no-alert */
 /* eslint-disable no-param-reassign */
 const showForm = (cls) => {
@@ -34,7 +35,7 @@ const disabledDiv = (one) => {
   });
 };
 
-const showMessage = (msg) => alert(msg);
+const showMessage = msg => alert(msg);
 
 export {
   showForm,
