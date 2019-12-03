@@ -1,5 +1,5 @@
 import { storeProject, getProjects, storeTodo, storeEditTodos, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, handlePriority, setDoneStyle } from './helpers';
+import { showForm, hideForm, showHide, showNewForm, handlePriority, disabledDiv } from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -69,13 +69,10 @@ const setDone = (title) => {
 const displayTodos = () => {
   displayTodosDiv.innerHTML = '';
 
-  const btnDone = (doneDiv) => {
+  const btnDone = () => {
     const one = document.createElement('button');
     one.setAttribute('class', 'submit-btn');
-    one.addEventListener('click', () => {
-      // setDoneStyle(one.parentNode);
-      doneDiv.classList.toggle('done-div');
-    });
+    one.addEventListener('click', () => disabledDiv(one));
     one.innerHTML = 'Done/Undone';
     return one;
   };
@@ -94,17 +91,16 @@ const displayTodos = () => {
       <p class="task-description">Description: ${todo.description}</p>
       <p class="task-date">Date: ${todo.date}</p>
       <p class="task-notes">Notes: ${todo.notes}</p>
-      <button id="btn-edit-todo" class="submit-btn" data-name="${todo.title}">Edit</button>
-      <button class="submit-btn" id="btn-priority">Priority: ${handlePriority(prio)}</button>
+      <button id="btn-edit-todo" class="submit-btn card-btn" data-name="${todo.title}">Edit</button>
+      <button class="submit-btn card-btn" id="btn-priority">Priority: ${handlePriority(prio)}</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
       `;
 
       // console.log(handlePriority(todo.priority));
       // <button id="btn-delete-todo" class="submit-btn">Priority: ${handlePriority(todo.priority)}</button>
       displayTodosDiv.appendChild(todoDiv);
-      const doneDiv = document.querySelector('#done-div');
 
-      todoDiv.appendChild(btnDone(doneDiv));
+      todoDiv.appendChild(btnDone());
 
     const doneBtn = document.querySelectorAll('#done');
     const cards = document.querySelectorAll('#tasks-list');

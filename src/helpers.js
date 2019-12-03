@@ -17,8 +17,23 @@ const showHide = (cls) => {
 };
 
 const setDoneStyle = (elem) => {
-  // elem.style.textDecoration = 'line-through';
   elem.classList.toggle('done-done');
+  elem.classList.toggle('.disabled');
+  elem.style.zIndex = 999;
+};
+
+const disabledDiv = (one) => {
+  setDoneStyle(one.parentNode);
+  const children = one.parentNode.childNodes;
+  children.forEach((child) => {
+    if (child.className === 'submit-btn card-btn' || child.className === 'submit-btn card-btn disabled') {
+      child.classList.toggle('disabled');
+    }
+
+    if (child.className === 'task-title' || child.className === 'task-title done') {
+      child.classList.toggle('done');
+    }
+  });
 };
 
 const handlePriority = (num) => {
@@ -50,5 +65,5 @@ export {
   showHide,
   showNewForm,
   handlePriority,
-  setDoneStyle,
+  disabledDiv,
 };
