@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-param-reassign */
 const showForm = (cls) => {
   cls.classList.remove('hidden');
 };
@@ -10,10 +12,6 @@ const showNewForm = (cls, btn1, btn2) => {
 
 const hideForm = (cls) => {
   cls.classList.add('hidden');
-};
-
-const showHide = (cls) => {
-  cls.classList.toggle('hidden');
 };
 
 const setDoneStyle = (elem) => {
@@ -41,7 +39,6 @@ const showMessage = (msg) => alert(msg);
 export {
   showForm,
   hideForm,
-  showHide,
   showNewForm,
   disabledDiv,
   showMessage,

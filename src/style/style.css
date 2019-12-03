@@ -44,14 +44,12 @@ body {
 }
 
 .submit-btn {
-    /* position: relative; */
     background-color: transparent;
     border: 2px solid orange;
     color: orange;
     border-radius: 5px;
     padding: .5rem 1rem;
     outline: none;
-    /* z-index: 500; */
     transition: all .2s;
 }
 
@@ -108,7 +106,7 @@ body {
 }
 
 .task-title {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
 }
 
 .task-date {
@@ -204,4 +202,9 @@ body {
     text-transform: capitalize;
     letter-spacing: 3px;
     text-decoration: underline;
+}
+
+.todo-details {
+    display: flex;
+    flex-wrap: wrap;
 }

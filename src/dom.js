@@ -1,5 +1,10 @@
-import { storeProject, getProjects, storeTodo, storeEditTodos, removeProject } from './storage';
-import { showForm, hideForm, showHide, showNewForm, disabledDiv, showMessage } from './helpers';
+/* eslint-disable no-return-assign */
+import {
+  storeProject, getProjects, storeTodo, removeProject,
+} from './storage';
+import {
+  showForm, hideForm, showNewForm, disabledDiv, showMessage,
+} from './helpers';
 import Todo from './todo';
 
 // Add / Remove project inputs
@@ -42,13 +47,8 @@ const noP = document.querySelector('#btn-p-no');
 let currentProject = '';
 let todoTasks = [];
 let currentTodo = '';
-let toDltTodo = '';
-let doneTitle = '';
-let done = false;
+const toDltTodo = '';
 
-
-// test button
-// const cons = document.querySelector('#console');
 
 const showEditForm = (title) => {
   currentTodo = '';
@@ -56,12 +56,6 @@ const showEditForm = (title) => {
   showForm(editForm);
   hideForm(submitForm);
   currentTodo = title;
-};
-
-const setDone = (title) => {
-  doneTitle = '';
-  doneTitle = title;
-  console.log(doneTitle);
 };
 
 // Empty the todos container, get the todos array from the storage,
@@ -77,27 +71,20 @@ const displayTodos = () => {
     return one;
   };
 
-  // const btnPriority = () => {
-  //   const prio = document.createElement('button');
-  //   prio.setAttribute('class', 'submit-btn');
-  //   prio.addEventListener('click', () => changePriority(prio));
-
-  // }
-
   const todos = JSON.parse(localStorage.getItem(currentProject));
   todos.forEach((todo) => {
-
     const todoDiv = document.createElement('div');
     todoDiv.setAttribute('class', 'tasks-list');
     todoDiv.setAttribute('id', 'tasks-list');
-    
+
     todoDiv.innerHTML = `
-      <div id="done-div"></div>
       <h3 class="task-title" id="todo-title"><span class="todo-h3"> ${todo.title} </span></h3>
-      <p class="task-description"><span class="todo-titles"> Description:</span> ${todo.description}</p>
-      <p class="task-date"><span class="todo-titles">Date:</span> ${todo.date}</p>
-      <p class="task-priority"><span class="todo-titles">Priority:</span> ${todo.priority}</p>
-      <p class="task-notes"><span class="todo-titles">Notes:</span> ${todo.notes}</p>
+      <div class="todo-details">
+        <p class="task-description"><span class="todo-titles"> Description:</span> ${todo.description}</p>
+        <p class="task-date"><span class="todo-titles">Date:</span> ${todo.date}</p>
+        <p class="task-date"><span class="todo-titles">Priority:</span> ${todo.priority}</p>
+        <p class="task-notes"><span class="todo-titles">Notes:</span> ${todo.notes}</p>
+      </div>
       <button id="btn-edit-todo" class="submit-btn card-btn" data-name="${todo.title}">Edit</button>
       <button id="btn-delete-todo" class="submit-btn btn-delete" data-delete="${todo.title}">Delete</button>
       `;
@@ -105,14 +92,6 @@ const displayTodos = () => {
     displayTodosDiv.appendChild(todoDiv);
     todoDiv.appendChild(btnDone());
 
-    const doneBtn = document.querySelectorAll('#done');
-    const cards = document.querySelectorAll('#tasks-list');
-
-    cards.forEach((card) => {
-      const priorityBtn = card.querySelector('#btn-priority');
-      if (done === true) priorityBtn.classList.add('hidden');
-    });
-    
     const btnsEdit = document.querySelectorAll('#btn-edit-todo');
     btnsEdit.forEach((btn) => {
       btn.addEventListener('click', () => showEditForm(btn.dataset.name));
@@ -135,7 +114,7 @@ const addProject = () => {
   project.project = pTitleinput.value;
   storeProject(project.project);
   // Setting the current project variable to the project name to track it later
-  currentProject = project.project;
+  return currentProject = project.project;
 };
 
 // Displaying the Added project as soon as it's added to the local storage
@@ -175,14 +154,14 @@ then empty the inputs and call the local storage function to save the array into
 then hide call the function to hide the form at last */
 
 const addTodo = () => {
-  if (todoTitleInput.value == '') {
-    return showMessage('Title of task required.')
-  } 
-  if (todoDescriptionInput.value == '') {
-    return showMessage('Description of task required.')
-  } 
-  if (todoDateInput.value == '') {
-    return showMessage('DateDue of task required.')
+  if (todoTitleInput.value === '') {
+    return showMessage('Title of task required.');
+  }
+  if (todoDescriptionInput.value === '') {
+    return showMessage('Description of task required.');
+  }
+  if (todoDateInput.value === '') {
+    return showMessage('DateDue of task required.');
   }
   const project = new Todo(currentProject, todoTitleInput.value,
     todoDescriptionInput.value, todoDateInput.value, todoPriorityInput.value, todoNotesInput.value);
@@ -195,22 +174,23 @@ const addTodo = () => {
   todoNotesInput.value = '';
 
   storeTodo(project.project, todoTasks);
-  hideForm(TodoFormDiv);
+  return hideForm(TodoFormDiv);
 };
 
 
 const editTodo = () => {
-  if (todoTitleInput.value == '') {
-    return showMessage('Title of task required.')
-  } 
-  if (todoDescriptionInput.value == '') {
-    return showMessage('Description of task required.')
-  } 
-  if (todoDateInput.value == '') {
-    return showMessage('DateDue of task required.')
+  if (todoTitleInput.value === '') {
+    return showMessage('Title of task required.');
+  }
+  if (todoDescriptionInput.value === '') {
+    return showMessage('Description of task required.');
+  }
+  if (todoDateInput.value === '') {
+    return showMessage('DateDue of task required.');
   }
 
-  todoTasks.forEach((todo) => {
+  todoTasks.forEach((t) => {
+    const todo = t;
     if (todo.title === currentTodo) {
       todo.title = todoTitleInput.value;
       todo.description = todoDescriptionInput.value;
@@ -229,7 +209,7 @@ const editTodo = () => {
   todoNotesInput.value = '';
 
   hideForm(TodoFormDiv);
-  displayTodos();
+  return displayTodos();
 };
 
 const removeTodos = () => {
@@ -266,8 +246,6 @@ editForm.addEventListener('click', editTodo);
 
 yess.addEventListener('click', removeTodos);
 noo.addEventListener('click', () => hideForm(areSure));
-
-// cons.addEventListener('click', displayTodos);
 
 pRemoveBtn.addEventListener('click', () => showForm(projectDelConfirm));
 yesP.addEventListener('click', handleRemoveProject);
