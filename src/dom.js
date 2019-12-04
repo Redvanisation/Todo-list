@@ -3,7 +3,7 @@ import {
   storeProject, getProjects, storeTodo, removeProject,
 } from './storage';
 import {
-  showForm, hideForm, showNewForm, disabledDiv, showMessage,
+  showForm, hideForm, showNewForm, disabledDiv, showMessage, removing,
 } from './helpers';
 import Todo from './todo';
 
@@ -222,8 +222,8 @@ const removeTodos = () => {
     }
   });
 
-  theTasks.splice(ind, 1);
-  storeTodo(currentProject, theTasks);
+
+  removing(theTasks, ind, currentProject, storeTodo);
   hideForm(areSure);
   displayTodos();
 };

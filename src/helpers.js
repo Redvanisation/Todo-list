@@ -37,10 +37,16 @@ const disabledDiv = (one) => {
 
 const showMessage = msg => alert(msg);
 
+const removing = (arr, ind, project, method) => {
+  arr.splice(ind, 1);
+  method(project, arr);
+};
+
 export {
   showForm,
   hideForm,
   showNewForm,
   disabledDiv,
   showMessage,
+  removing,
 };
