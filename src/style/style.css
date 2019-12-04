@@ -90,7 +90,7 @@ body {
 
 
 .new-task {
-    position: fixed;
+    position: absolute;
     top: 55%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -213,6 +213,11 @@ body {
     }
 
     .new-task {
-        width: 80%;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 90%;
     }
+
 }
