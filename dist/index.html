@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">The To-Do List</h1>
+
+    </header>
+    
+    <main class="content container-fluid">
+        <!-- Forms -->
+        <div class="new-project text-center">
+            <input type="text" id="project-title" class="project-title-input input col-md-6" placeholder="Project Title" required>
+            <button id="submit-project" class="submit-btn">Create</button>
+        </div>
+        
+
+            <!-- Display elements -->
+        <div class="projects-container row">
+            <div id='display-projects' class="display-projects col-md-4 text-center"></div>
+
+            <div id="new-task" class="new-task hidden">
+                <input type="text" placeholder="Title" id="task-title" class="task-title input" required><br>
+                <input type="text" placeholder="Description" id="task-description" class="task-description input"><br>
+                <input type="date" id="task-date" class="task-date input"><br>
+                <label id="checkbox-label" class="task-label input">Priority:</label>
+                <select id="task-priority" class="task-options input">
+                    <option value="Low" class="task-option">Low</option> 
+                    <option value="Normal" class="task-option" selected>Normal</option>
+                    <option value="High" class="task-option">High</option>
+                </select><br>
+                <textarea name="notes" id="task-notes" class="task-notes input" cols="30" rows="10"></textarea><br>
+                </br>
+                <button id="form-btn-cancel" class="submit-btn">Cancel</button>
+                <button id="form-btn-submit" class="submit-btn ml-1">Submit</button>
+                <button id="form-btn-edit" class="submit-btn ml-1 hidden">Edit</button>
+            </div>
+
+            <div class="new-task hidden" id="are-sure">
+                <h3 class="title">Are you sure?</h3><br>
+                <button class="submit-btn" id="btn-no">No</button>
+                <button class="submit-btn" id="btn-yes">Yes</button>
+            </div>
+
+            <div class="new-task hidden" id="project-del-confirm">
+                <h3 class="title">Are you sure?</h3><br>
+                <button class="submit-btn" id="btn-p-no">No</button>
+                <button class="submit-btn" id="btn-p-yes">Yes</button>
+            </div>
+
+
+            <div id="todo-container" class="display-tasks col-md-8 text-center">
+                <h2 id="task-project-h2"></h2>
+                <div class="project-btns-container mt-3">
+                    <button id="new-task-btn" class="submit-btn new-task-btn hidden">New Task</button>
+                    <button id="delete-project-btn" class="submit-btn ml-2 hidden">Delete</button>
+                </div>
+                <div id="display-tasks"></div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
