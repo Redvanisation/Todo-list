@@ -8,7 +8,7 @@
     JavaScript Project
     <br>
     <br>
-    <a href="https://rawcdn.githack.com/Redvanisation/Todo-list/63e1f3d8d7af628a192613be77d1ed09b7ca697c/dist/index.html" target="_blank">View Demo</a>
+    <a href="https://rawcdn.githack.com/Redvanisation/Todo-list/dc95cf18d1646a2121fb6912f485c7c5dc69f3f3/dist/index.html" target="_blank">View Demo</a>
     ·
     <a href="https://github.com/Redvanisation/Todo-list/issues">Report Bug</a>
     ·
