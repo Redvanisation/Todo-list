@@ -1,8 +1,12 @@
-# Todo-list
+# Will Do
 
 <br>
 <p align="center">
-  <h3 align="center">Todo List</h3>
+  <a href="https://github.com/Redvanisation/Todo-list">
+    <img src="./src/img/screenshot.png" alt="Logo" width="860" height="460">
+  </a>
+
+  <h2 align="center">Will Do</h2>
 
   <p align="center">
     JavaScript Project
